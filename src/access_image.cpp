@@ -57,7 +57,12 @@ void copy_image(Image& to, const Image& from)
   
   // TODO: populate the remaining fields in 'to' and copy the data
   // You might want to check how 'memcpy' function works
-  
-  NOT_IMPLEMENTED();
-  
+
+  to.h = from.h;
+  to.w = from.w;
+
+  for (int i = 0; i < to.h * to.w * to.c; i ++) 
+    to.data[i] = from.data[i];
+
+  return; 
   }
