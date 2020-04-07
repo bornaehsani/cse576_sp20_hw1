@@ -112,16 +112,27 @@ int main(int argc, char **argv)
   {
   // Image manipulation for fun testing.
   
-  Image im2 = load_image("data/dog.jpg");
 
-  shift_image(im2, 0, .4);
-  shift_image(im2, 1, .4);
-  shift_image(im2, 2, .4);
+//  Image im2 = load_image("data/dog.jpg");
+//
+//  shift_image(im2, 0, .4);
+//  shift_image(im2, 1, .4);
+//  shift_image(im2, 2, .4);
+//
+//  clamp_image(im2);
 
-  clamp_image(im2);
+//  im2.save_image("output/pixel_modifying_output");
 
 
-  im2.save_image("output/pixel_modifying_output");
+  Image im = load_image("data/dog.jpg");
+  rgb_to_hsv(im);
+  scale_image(im, 1, 2);
+  clamp_image(im);
+  hsv_to_rgb(im);
+  im.save_image("output/dog_scale_saturated");
+
+
+
   
   // Running example tests
   

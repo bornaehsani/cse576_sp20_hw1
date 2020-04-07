@@ -78,8 +78,12 @@ void scale_image(Image& im, int c, float v)
   
   // TODO: scale all the pixels at the specified channel
   
-  NOT_IMPLEMENTED();
-  
+
+  for (int i = c * im.h * im.w; i < (c+1) * im.h * im.w; i++) {
+    im.data[i] *= v;
+  } 
+ 
+  return;
   }
 
 
