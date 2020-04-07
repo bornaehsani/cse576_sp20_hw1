@@ -60,9 +60,12 @@ void shift_image(Image& im, int c, float v)
   assert(c>=0 && c<im.c); // needs to be a valid channel
   
   // TODO: shift all the pixels at the specified channel
-  
-  NOT_IMPLEMENTED();
-  
+
+  for (int i = c * im.h * im.w; i < (c+1) * im.h * im.w; i++) {
+    im.data[i] += v;
+  } 
+ 
+  return;  
   }
 
 // HW0 #8
