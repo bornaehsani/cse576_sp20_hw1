@@ -118,21 +118,21 @@ void rgb_to_hsv(Image& im)
   int im_size = im.h * im.w;
 
   for (int i = 0; i < im_size; i ++) {
-    int R = im.data[i];
-    int G = im.data[i + im_size];
-    int B = im.data[i + 2 * im_size];
+    float R = im.data[i];
+    float G = im.data[i + im_size];
+    float B = im.data[i + 2 * im_size];
 
-    int V = max (max(R, G), B);
-    int m = min (min(R, G), B);
+    float V = max (max(R, G), B);
+    float m = min (min(R, G), B);
 
-    int C = V - m;
+    float C = V - m;
 
-    int S = 0;
+    float S = 0.0;
     if (V)
-      S = C / V;
+      S =  C / V;
 
-    int H = 0;
-    int Hp = 0;
+    float H = 0;
+    float Hp = 0;
 
     if (C) {
 
