@@ -7,6 +7,10 @@
 
 using namespace std;
 
+#define GRAY_R_C 0.299
+#define GRAY_G_C 0.587
+#define GRAY_B_C 0.114
+
 // HW0 #3
 // const Image& im: input image
 // return the corresponding grayscale image
@@ -16,10 +20,13 @@ Image rgb_to_grayscale(const Image& im)
   Image gray(im.w,im.h,1); // create a new grayscale image (note: 1 channel)
   
   // TODO: calculate the pixels of 'gray'
-  
-  
-  NOT_IMPLEMENTED();
-  
+
+  int gray_size = gray.h * gray.w;
+
+  for (int i = 0; i < gray.h * gray.w; i ++) {
+    gray.data[i] = ( (im.data[i] * GRAY_R_C) + (im.data[i + gray_size] * GRAY_G_C) + (im.data[i + 2 * gray_size] * GRAY_B_C) );
+  }
+
   return gray;
   }
 
