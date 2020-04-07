@@ -164,9 +164,71 @@ void hsv_to_rgb(Image& im)
   assert(im.c==3 && "only works for 3-channels images");
   
   // TODO: Convert all pixels from HSV format to RGB format
-  
-  NOT_IMPLEMENTED();
-  
+   int im_size = im.h * im.w;
+
+  for (int i = 0; i < im_size; i ++) {
+    float H = im.data[i];
+    float S = im.data[i + im_size];
+    float V = im.data[i + 2 * im_size];
+
+    float C = S * V;
+
+    float X = C * (1 - fabs( fmod((6 * H), 2) - 1));
+
+    float m = V - C;
+
+    float Rp, Gp, Bp;
+
+    if (H >= 0 && H < (float) 1/6) {
+      Rp = C;
+      Gp = X;
+      Bp = 0;
+    }
+
+    else if ( H >= (float) 1/6 && H < (float) 2/6) {
+      Rp = X;
+      Gp = C;
+      Bp = 0;
+    }
+
+    else if ( H >= (float) 2/6 && H < (float) 3/6) {
+      Rp = 0;
+      Gp = C;
+      Bp = X;
+    }
+
+    else if ( H >= (float) 3/6 && H < (float) 4/6) {
+      Rp = 0;
+      Gp = X;
+      Bp = C;
+    }
+
+    else if ( H >= (float) 4/6 && H < (float) 5/6) {
+      Rp = X;
+      Gp = 0;
+      Bp = C;
+    }
+
+    else {
+      Rp = C;
+      Gp = 0;
+      Bp = X;
+    }
+
+ 
+
+    float R = Rp + m;
+    float G = Gp + m;
+    float B = Bp + m;
+
+
+    im.data[i] = R;
+    im.data[i + im_size] = G;
+    im.data[i + 2 * im_size] = B;
+
+  }
+
+  return;
   }
 
 // HW0 #9
