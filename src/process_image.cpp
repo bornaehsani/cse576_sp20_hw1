@@ -89,7 +89,9 @@ void clamp_image(Image& im)
   {
   // TODO: clamp all the pixels in all channel to be between 0 and 1
   
-  NOT_IMPLEMENTED();
+  for (int i = 0; i < im.c * im.h * im.w; i ++) {
+    im.data[i] = (im.data[i] < 0) ? 0 : (im.data[i] > 1 ? 1 : im.data[i]);
+  }
   
   }
 
