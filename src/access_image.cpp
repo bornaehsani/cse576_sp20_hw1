@@ -8,10 +8,8 @@
 int pixel_address(const Image& im, int x, int y, int ch)
   {
   // TODO: calculate and return the index
-  
-  NOT_IMPLEMENTED();
-  
-  return 0;
+  //
+  return ((ch * im.w * im.h) + (y * im.w) + x);
   }
 
 // HW0 #1
@@ -21,10 +19,11 @@ int pixel_address(const Image& im, int x, int y, int ch)
 float get_clamped_pixel(const Image& im, int x, int y, int ch)
   {
   // TODO: clamp the coordinates and return the correct pixel value
-  
-  NOT_IMPLEMENTED();
-  
-  return 0.0;
+
+  int clamped_x = (x >= im.w) ? (im.w-1) : (x < 0 ? 0 : x);
+  int clamped_y = (y >= im.h) ? (im.h-1) : (y < 0 ? 0 : y);
+  int clamped_ch = (ch >= im.c) ? (im.c-1) : (ch < 0 ? 0 : ch);
+  return im(clamped_x, clamped_y, clamped_ch);
   }
 
 
@@ -35,8 +34,13 @@ void set_pixel(Image& im, int x, int y, int c, float value)
   {
   // TODO: Only set the pixel to the value if it's inside the image
   
-  NOT_IMPLEMENTED();
-  
+  if ( (x < 0) || (x >= im.w) ||
+       (y < 0) || (y >= im.h) ||
+       (c < 0) || (c >= im.c) )
+    return;
+
+  im(x,y,c) = value;
+  return;
   }
 
 
