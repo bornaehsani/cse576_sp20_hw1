@@ -145,6 +145,10 @@ void rgb_to_hsv(Image& im)
 
       H = (Hp < 0) ? (Hp / 6 + 1) : (Hp / 6);
 
+      while (H >= 1)
+        H --;
+      while (H < 0)
+        H ++;
     }
 
 
