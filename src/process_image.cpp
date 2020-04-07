@@ -115,7 +115,45 @@ void rgb_to_hsv(Image& im)
   
   // TODO: Convert all pixels from RGB format to HSV format
   
-  NOT_IMPLEMENTED();
+  int im_size = im.h * im.w;
+
+  for (int i = 0; i < im_size; i ++) {
+    int R = im.data[i];
+    int G = im.data[i + im_size];
+    int B = im.data[i + 2 * im_size];
+
+    int V = max (max(R, G), B);
+    int m = min (min(R, G), B);
+
+    int C = V - m;
+
+    int S = 0;
+    if (V)
+      S = C / V;
+
+    int H = 0;
+    int Hp = 0;
+
+    if (C) {
+
+      if (V == R) 
+        Hp = (G - B) / C;
+      else if (V == G) 
+        Hp = (B - R) / C + 2;
+      else 
+        Hp = (R - G) / C + 4;
+
+      H = (Hp < 0) ? (Hp / 6 + 1) : (Hp / 6);
+
+    }
+
+
+    im.data[i] = H;
+    im.data[i + im_size] = S;
+    im.data[i + 2 * im_size] = V;
+  }
+
+  return;
   
   }
 
